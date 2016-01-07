@@ -66,7 +66,7 @@ def respond(sock):
     if len(parts) > 1 and parts[0] == "GET":
         transmit("HTTP/1.0 200 OK\n\n", sock)
         try:
-            file_handler = open("trivial.html")
+            file_handler = open("trivia.html")
             transmit(file_handler.read(),sock)
         except Exception as e:
             print("404 File Not Found")
@@ -95,7 +95,8 @@ def transmit(msg, sock):
     
 
 def main():
-    port = random.randint(5000,8000)
+    #port = random.randint(5000,8000)
+    port = 5000
     sock = listen(port)
     print("Listening on port {}".format(port))
     print("Socket is {}".format(sock))
