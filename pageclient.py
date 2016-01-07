@@ -12,14 +12,20 @@ def connect(sock, port):
 
     return
 
+def transmit(msg, sock):
+    sock.send(msg)
+    return
+
 def receive(sock):
-    sock.recv(1024)
+    str(sock.recv(1024), 'UTF-8')
+    print('received data')
     return
 
 def main():
     sock = socket.socket()
     port = 5000
     connect(sock, port)
-    print(receive(sock))
+    transmit(bytes('GET /trivia.html', encoding='utf-8'),sock)
+    receive(sock)
 
 main()

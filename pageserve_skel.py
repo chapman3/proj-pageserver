@@ -57,6 +57,7 @@ def respond(sock):
     Respond (only) to GET
 
     """
+    print("reached respond function")
     sent = 0
     request = sock.recv(1024)  # We accept only short requests
     request = str(request, encoding='utf-8', errors='strict')
