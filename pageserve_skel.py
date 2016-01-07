@@ -51,11 +51,6 @@ def serve(sock, func):
         _thread.start_new_thread(func, (clientsocket,))
 
 
-CAT = """
-     ^ ^
-   =(   )=
-   """
-
 
 def respond(sock):
     """
@@ -70,7 +65,20 @@ def respond(sock):
     parts = request.split()
     if len(parts) > 1 and parts[0] == "GET":
         transmit("HTTP/1.0 200 OK\n\n", sock)
-        transmit(CAT, sock)
+        try:
+            file_handler = open("trivial.html")
+            transmit(file_handler.read(),sock)
+        except Exception as e:
+            print("404 File Not Found")
+            file_handler = \
+                "<html>" \
+                "<body>" \
+                "<p>Error 404: File not found</p>" \
+                "<p>Python HTTP server</p>" \
+                "</body>" \
+                "</html>"
+            transmit(file_handler, sock)
+
     else:
         transmit("\nI don't handle this request: {}\n".format(request), sock)
 
