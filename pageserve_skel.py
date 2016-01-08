@@ -12,9 +12,9 @@ Socket programming in Python
   Change it to serve files if they end with .html and are in the current directory
 """
 
-import socket    # Basic TCP/IP communication on the internet
-import random    # To pick a port at random, giving us some chance to pick a port not in use
-import _thread   # Response computation runs concurrently with main program 
+import socket  # Basic TCP/IP communication on the internet
+import random  # To pick a port at random, giving us some chance to pick a port not in use
+import _thread  # Response computation runs concurrently with main program
 
 
 def listen(portnum):
@@ -31,8 +31,9 @@ def listen(portnum):
     serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Bind to port and make accessible from anywhere that has our IP address
     serversocket.bind(('', portnum))
-    serversocket.listen(1)    # A real server would have multiple listeners
+    serversocket.listen(1)  # A real server would have multiple listeners
     return serversocket
+
 
 def serve(sock, func):
     """
@@ -51,7 +52,6 @@ def serve(sock, func):
         _thread.start_new_thread(func, (clientsocket,))
 
 
-
 def respond(sock):
     """
     Respond (only) to GET
@@ -68,7 +68,7 @@ def respond(sock):
         transmit("HTTP/1.0 200 OK\n\n", sock)
         try:
             file_handler = open("trivia.html")
-            transmit(file_handler.read(),sock)
+            transmit(file_handler.read(), sock)
         except Exception as e:
             print("404 File Not Found")
             file_handler = \
@@ -87,21 +87,22 @@ def respond(sock):
 
     return
 
+
 def transmit(msg, sock):
     """It might take several sends to get the whole buffer out"""
     sent = 0
     while sent < len(msg):
-        buff = bytes( msg[sent: ], encoding="utf-8")
-        sent += sock.send( buff )
-    
+        buff = bytes(msg[sent:], encoding="utf-8")
+        sent += sock.send(buff)
+
 
 def main():
-    #port = random.randint(5000,8000)
-    port = 5000
+    # port = random.randint(5000,8000)
+    port = 5001
     sock = listen(port)
     print("Listening on port {}".format(port))
     print("Socket is {}".format(sock))
     serve(sock, respond)
 
+
 main()
-    
