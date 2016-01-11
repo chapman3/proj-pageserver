@@ -15,7 +15,7 @@ Socket programming in Python
 import socket  # Basic TCP/IP communication on the internet
 import random  # To pick a port at random, giving us some chance to pick a port not in use
 import _thread  # Response computation runs concurrently with main program
-
+import sys
 
 def listen(portnum):
     """
@@ -28,7 +28,15 @@ def listen(portnum):
        the port is already in use).
     """
     # Internet, streaming socket
-    serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    try:
+    #create an AF_INET, STREAM socket (TCP)
+        serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    except socket.error as msg:
+        print ('Failed to create socket. Error code: ' + str(msg[0]) + ' , Error message : ' + msg[1])
+        sys.exit();
+
+    print('Socket Created')
     # Bind to port and make accessible from anywhere that has our IP address
     serversocket.bind(('', portnum))
     serversocket.listen(1)  # A real server would have multiple listeners
@@ -57,7 +65,7 @@ def respond(sock):
     Respond (only) to GET
 
     """
-    print("reached respond function")
+
     sent = 0
     request = sock.recv(1024)  # We accept only short requests
     request = str(request, encoding='utf-8', errors='strict')
@@ -97,8 +105,7 @@ def transmit(msg, sock):
 
 
 def main():
-    # port = random.randint(5000,8000)
-    port = 5001
+    port = random.randint(5000,8000)
     sock = listen(port)
     print("Listening on port {}".format(port))
     print("Socket is {}".format(sock))
