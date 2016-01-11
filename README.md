@@ -45,3 +45,5 @@ A "getting started" project for CIS 322, software engineering 1 at University of
 Referenced web pages:
 File Transmission: http://blog.wachowicz.eu/?p=256
 Socket Documentation: https://docs.python.org/3.4/library/socket.html
+Import _thread Error Handling: http://stackoverflow.com/questions/3326740/pydev-importerror-no-module-named-thread-debugging-no-longer-works-after-pydev
+Socket Creation Error Handling: http://www.binarytides.com/python-socket-programming-tutorial/

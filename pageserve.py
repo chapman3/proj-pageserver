@@ -14,7 +14,11 @@ Socket programming in Python
 
 import socket  # Basic TCP/IP communication on the internet
 import random  # To pick a port at random, giving us some chance to pick a port not in use
-import _thread  # Response computation runs concurrently with main program
+try:
+    import thread
+except ImportError:
+    import _thread as thread #Py3K changed it.
+    #  Response computation runs concurrently with main program
 import sys
 
 def listen(portnum):
