@@ -1,5 +1,8 @@
 """
-Socket programming in Python
+  David Chapman
+  CIS399 Winter 2016
+  Project 1
+  Socket programming in Python
   as an illustration of the basic mechanisms of a web server.
 
   Based largely on https://docs.python.org/3.4/howto/sockets.html
@@ -10,6 +13,10 @@ Socket programming in Python
   FIXME:
   Currently this program always serves an ascii graphic of a cat.
   Change it to serve files if they end with .html and are in the current directory
+
+  Currently pageserve.py runs on a local machine, then the user accesses https://localhost:(Port) to be served
+  a webpage (trivia.html). When attempting to run it on ix, it simply initiates the server socket and listens.
+  I have not been able to figure out how to connect to it on ix from a web browser.
 """
 
 import socket  # Basic TCP/IP communication on the internet

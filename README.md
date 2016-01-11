@@ -42,8 +42,13 @@ A "getting started" project for CIS 322, software engineering 1 at University of
 
 
 #### David's Piece ####
+
 Referenced web pages:
 File Transmission: http://blog.wachowicz.eu/?p=256
 Socket Documentation: https://docs.python.org/3.4/library/socket.html
 Import _thread Error Handling: http://stackoverflow.com/questions/3326740/pydev-importerror-no-module-named-thread-debugging-no-longer-works-after-pydev
 Socket Creation Error Handling: http://www.binarytides.com/python-socket-programming-tutorial/
+
+Notes: Currently pageserve.py runs on a local machine, then the user accesses https://localhost:(Port) to be served
+       a webpage (trivia.html). When attempting to run it on ix, it simply initiates the server socket and listens.
+       I have not been able to figure out how to connect to it on ix from a web browser.
